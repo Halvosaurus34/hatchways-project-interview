@@ -38,10 +38,7 @@ export const register = (credentials) => async (dispatch) => {
 
 export const login = (credentials) => async (dispatch) => {
   try {
-    console.log("login thunk");
-
     const { data } = await axios.post("/auth/login", credentials);
-    console.log(data, "thunk data");
     dispatch(gotUser(data));
     socket.emit("go-online", data.id);
   } catch (error) {
@@ -86,10 +83,9 @@ const sendMessage = (data, body) => {
 
 // message format to send: {recipientId, text, conversationId}
 // conversationId will be set to null if its a brand new conversation
-export const postMessage = (body) => (dispatch) => {
+export const postMessage = (body) => async (dispatch) => {
   try {
-    const data = saveMessage(body);
-
+    const data = await saveMessage(body);
     if (!body.conversationId) {
       dispatch(addConversation(body.recipientId, data.message));
     } else {
