@@ -89,7 +89,7 @@ const Login = (props) => {
           </Button>
         </Grid>
         <form onSubmit={handleLogin} style={{ width: "65%" }}>
-          <Grid justify="center" spacing={2}>
+          <Grid>
             <Typography variant="h4" style={{ fontWeight: "700" }}>
               Welcome back!
             </Typography>
