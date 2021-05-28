@@ -22,14 +22,7 @@ const useStyles = makeStyles(() => ({
 
 const ActiveChat = (props) => {
   const classes = useStyles();
-  // const { user } = props;
   const conversation = props.conversation || {};
-
-  // useEffect(() => {
-  //   if (props.conversation) {
-  //     setMessages(props.conversation.messages);
-  //   }
-  // }, [props.conversation]);
 
   return (
     <Box className={classes.root}>
