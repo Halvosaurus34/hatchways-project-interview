@@ -22,15 +22,14 @@ const useStyles = makeStyles(() => ({
 
 const ActiveChat = (props) => {
   const classes = useStyles();
-  const { user } = props;
+  // const { user } = props;
   const conversation = props.conversation || {};
-  const [messages, setMessages] = useState([]);
 
-  useEffect(() => {
-    if (props.conversation) {
-      setMessages(props.conversation.messages);
-    }
-  }, [props.conversation]);
+  // useEffect(() => {
+  //   if (props.conversation) {
+  //     setMessages(props.conversation.messages);
+  //   }
+  // }, [props.conversation]);
 
   return (
     <Box className={classes.root}>
@@ -42,14 +41,14 @@ const ActiveChat = (props) => {
           />
           <Box className={classes.chatContainer}>
             <Messages
-              messages={messages}
+              messages={conversation.messages}
               otherUser={conversation.otherUser}
-              userId={user.id}
+              userId={props.user.id}
             />
             <Input
               otherUser={conversation.otherUser}
               conversationId={conversation.id}
-              user={user}
+              user={props.user}
             />
           </Box>
         </>
@@ -64,7 +63,8 @@ const mapStateToProps = (state) => {
     conversation:
       state.conversations &&
       state.conversations.find(
-        (conversation) => conversation.otherUser.id === state.activeConversation
+        (conversation) =>
+          conversation.otherUser.username === state.activeConversation
       ),
   };
 };
