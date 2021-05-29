@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import { Input, Header, Messages } from "./index";
@@ -12,11 +12,33 @@ const useStyles = makeStyles(() => ({
   },
   chatContainer: {
     marginLeft: 41,
-    marginRight: 41,
+    marginRight: "1vw",
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
-    justifyContent: "space-between",
+  },
+  messagesContainer: {
+    maxHeight: "calc(68vh - 4rem)",
+    overflow: "scroll",
+    overflowX: "hidden",
+    overflowY: "auto",
+    "&::-webkit-scrollbar": {
+      width: "1em",
+      color: "grey",
+      paddingLeft: "2rem",
+      height: "2rem",
+    },
+    "&::-webkit-scrollbar-track": {
+      boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+      webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+      height: "2rem",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "rgba(0,0,0,.1)",
+      height: "2rem",
+      marginLeft: ".5rem",
+      borderRadius: "2rem",
+    },
   },
 }));
 
@@ -33,11 +55,13 @@ const ActiveChat = (props) => {
             online={conversation.otherUser.online || false}
           />
           <Box className={classes.chatContainer}>
-            <Messages
-              messages={conversation.messages}
-              otherUser={conversation.otherUser}
-              userId={props.user.id}
-            />
+            <Box className={classes.messagesContainer}>
+              <Messages
+                messages={conversation.messages}
+                otherUser={conversation.otherUser}
+                userId={props.user.id}
+              />
+            </Box>
             <Input
               otherUser={conversation.otherUser}
               conversationId={conversation.id}
