@@ -9,6 +9,7 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexGrow: 8,
     flexDirection: "column",
+    height: "95vh",
   },
   chatContainer: {
     marginLeft: 41,
@@ -18,7 +19,8 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
   },
   messagesContainer: {
-    maxHeight: "calc(68vh - 4rem)",
+    flexGrow: 1,
+    height: "50vh",
     overflow: "scroll",
     overflowX: "hidden",
     overflowY: "auto",

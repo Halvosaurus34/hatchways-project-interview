@@ -70,14 +70,13 @@ export const fetchConversations = () => async (dispatch) => {
 
 const saveMessage = async (body) => {
   const { data } = await axios.post("/api/messages", body);
-  data.message.recipientId = data.recipientId;
+  data.message.recipientId = body.recipientId;
   return data;
 };
 
 const sendMessage = (data, body) => {
   socket.emit("new-message", {
     message: data.message,
-    recipientId: body.recipientId,
     sender: data.sender,
   });
 };

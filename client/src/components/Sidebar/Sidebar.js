@@ -56,13 +56,8 @@ const Sidebar = (props) => {
           .filter((conversation) =>
             conversation.otherUser.username.includes(searchTerm)
           )
-          .map((conversation) => {
-            return (
-              <Chat
-                conversation={conversation}
-                key={conversation.conversationId}
-              />
-            );
+          .map((conversation, index) => {
+            return <Chat conversation={conversation} key={index} />;
           })}
       </Box>
     </Box>

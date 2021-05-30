@@ -1,5 +1,6 @@
 import io from "socket.io-client";
 import store from "./store";
+
 import {
   setNewMessage,
   removeOfflineUser,
@@ -10,7 +11,7 @@ const socket = io(window.location.origin);
 
 socket.on("connect", () => {
   console.log("connected to server");
-
+  const id = store.getState().user.id;
   socket.on("add-online-user", (id) => {
     store.dispatch(addOnlineUser(id));
   });
@@ -18,8 +19,10 @@ socket.on("connect", () => {
   socket.on("remove-offline-user", (id) => {
     store.dispatch(removeOfflineUser(id));
   });
-  socket.on("new-message", (data) => {
-    store.dispatch(setNewMessage(data.message, data.sender));
+  socket.on("received-message", ({ message, sender }) => {
+    if (id === message.recipientId) {
+      store.dispatch(setNewMessage(message, sender));
+    }
   });
 });
 
