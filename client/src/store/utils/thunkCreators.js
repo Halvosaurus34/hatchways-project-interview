@@ -24,7 +24,6 @@ export const fetchUser = () => async (dispatch) => {
     dispatch(setFetchingStatus(false));
   }
 };
-
 export const register = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/register", credentials);

@@ -1,22 +1,16 @@
 import React from "react";
 import { Grid, Typography } from "@material-ui/core";
 import bubble from "./assets/bubble.svg";
-import backgroundImage from "./assets/bg-img.png";
+import { signInSignOutCSS } from "./signInSignOutCSS";
 
 function LoginSignupSidebar() {
+  const classes = signInSignOutCSS();
+
   return (
     <Grid
       container
       item
-      style={{
-        backgroundImage: `linear-gradient(to bottom, rgb(58, 141, 255, 0.75), #86B9FF ), url(${backgroundImage})`,
-        opacity: "85%",
-
-        backgroundRepeat: "no-repeat",
-        backgroundColor: "linear-gradient(#3A8DFF, #86B9FF)",
-        backgroundSize: "cover",
-        width: "auto",
-      }}
+      className={classes.mainSideBarContainer}
       sm={5}
       md={5}
       lg={5}
@@ -24,15 +18,8 @@ function LoginSignupSidebar() {
       alignContent="center"
       justify="center"
     >
-      <img
-        src={bubble}
-        alt="chat icon"
-        style={{ maxWidth: "4rem", margin: "1rem 7rem" }}
-      />
-      <Typography
-        variant="h4"
-        style={{ color: "white", textAlign: "center", margin: "2rem" }}
-      >
+      <img src={bubble} alt="chat icon" className={classes.chatBubble} />
+      <Typography variant="h4" className={classes.sidebarText}>
         Converse with anyone with any language
       </Typography>
     </Grid>

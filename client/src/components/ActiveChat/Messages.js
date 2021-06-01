@@ -16,7 +16,9 @@ const Messages = (props) => {
 
   const AlwaysScrollToBottom = () => {
     const elementRef = useRef();
-    useEffect(() => elementRef.current.scrollIntoView());
+    useEffect(() => {
+      elementRef.current.scrollIntoView();
+    }, []);
     return <div ref={elementRef} />;
   };
 
