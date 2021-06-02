@@ -35,7 +35,6 @@ export const signInSignOutCSS = makeStyles(() => ({
   mainSideBarContainer: {
     backgroundImage: `linear-gradient(to bottom, rgb(58, 141, 255, 0.75), #86B9FF ), url(${backgroundImage})`,
     opacity: "85%",
-
     backgroundRepeat: "no-repeat",
     backgroundColor: "linear-gradient(#3A8DFF, #86B9FF)",
     backgroundSize: "cover",
