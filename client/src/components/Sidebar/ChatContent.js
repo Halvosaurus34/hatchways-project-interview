@@ -39,14 +39,17 @@ const ChatContent = (props) => {
 
   const { conversation } = props;
   const { latestMessageText, otherUser } = conversation;
-
+  const black = props.unRead ? "black" : "";
   return (
     <Box className={classes.root}>
       <Box>
         <Typography className={classes.username}>
           {otherUser.username}
         </Typography>
-        <Typography className={classes.previewText}>
+        <Typography
+          className={classes.previewText}
+          style={{ color: `${black}` }}
+        >
           {latestMessageText}
         </Typography>
       </Box>
