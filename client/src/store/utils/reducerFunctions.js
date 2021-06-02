@@ -12,11 +12,11 @@ export const addMessageToStore = (state, payload) => {
     newConvo.latestMessageText = message.text;
     return [newConvo, ...state];
   }
-
   const newStateArray = state.map((convo) => {
     if (
       convo.id === message.conversationId &&
-      convo.otherUser.id === message.recipientId
+      (convo.otherUser.id === message.recipientId ||
+        convo.otherUser.id === message.senderId)
     ) {
       const convoCopy = { ...convo };
       convoCopy.messages = [...convo.messages, message];
