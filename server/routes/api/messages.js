@@ -44,20 +44,4 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/clearUnRead/:id", async (req, res, next) => {
-  try {
-    await Conversation.update(
-      { unReadMessages: 0 },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
-    );
-    res.sendStatus(200);
-  } catch (err) {
-    next(error);
-  }
-});
-
 module.exports = router;

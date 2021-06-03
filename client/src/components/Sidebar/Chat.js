@@ -5,8 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { setActiveChat } from "../../store/activeConversation";
 import { setRead } from "../../store/utils/thunkCreators";
 import { connect } from "react-redux";
-
-const styles = {
+const styles = (theme) => ({
   root: {
     borderRadius: 8,
     height: 80,
@@ -21,7 +20,7 @@ const styles = {
   unReadIcon: {
     padding: ".2rem .5rem",
     width: "1rem",
-    background: "#3A8DFF",
+    background: theme.palette.primary.main,
     color: "white",
     fontSize: ".7rem",
     borderRadius: "20rem",
@@ -29,7 +28,7 @@ const styles = {
   hidden: {
     display: "none",
   },
-};
+});
 
 class Chat extends Component {
   handleClick = async (conversation) => {
@@ -43,23 +42,29 @@ class Chat extends Component {
   render() {
     const { classes } = this.props;
     const otherUser = this.props.conversation.otherUser;
+    const conversation = this.props.conversation;
+    const userWithUnReadMessages = conversation.userWithUnReadMessages;
+    const unReadMessages = conversation.unReadMessages;
+    const activeConversation = this.props.activeConvo;
+
     const unRead =
-      this.props.conversation.userWithUnReadMessages !== otherUser.id &&
-      this.props.activeConvo !== otherUser.username
-        ? this.props.conversation.unReadMessages
+      userWithUnReadMessages !== otherUser.id &&
+      activeConversation !== otherUser.username
+        ? unReadMessages
         : "";
+
     const isHidden =
-      this.props.conversation.userWithUnReadMessages === otherUser.id ||
-      this.props.activeConvo === otherUser.username ||
-      this.props.conversation.unReadMessages === 0
-        ? "none"
-        : "";
-    if (this.props.activeConvo === otherUser.username) {
-      this.handleReadReset(this.props.conversation);
+      userWithUnReadMessages === otherUser.id ||
+      activeConversation === otherUser.username ||
+      unReadMessages === 0;
+
+    if (activeConversation === otherUser.username) {
+      this.handleReadReset(conversation);
     }
+
     return (
       <Box
-        onClick={() => this.handleClick(this.props.conversation)}
+        onClick={() => this.handleClick(conversation)}
         className={classes.root}
       >
         <BadgeAvatar
@@ -69,11 +74,11 @@ class Chat extends Component {
           sidebar={true}
         />
         <ChatContent
-          conversation={this.props.conversation}
+          conversation={conversation}
           unRead={
-            this.props.conversation.userWithUnReadMessages !== otherUser.id &&
-            this.props.activeConvo !== otherUser.username &&
-            this.props.conversation.unReadMessages !== 0
+            userWithUnReadMessages !== otherUser.id &&
+            activeConversation !== otherUser.username &&
+            unReadMessages !== 0
           }
         />
         <Box>
@@ -81,7 +86,7 @@ class Chat extends Component {
             variant="contained"
             size="small"
             className={classes.unReadIcon}
-            style={{ display: `${isHidden}` }}
+            style={{ display: `${isHidden ? "none" : ""}` }}
           >
             {unRead}
           </Icon>

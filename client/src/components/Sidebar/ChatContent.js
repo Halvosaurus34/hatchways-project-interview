@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     borderRadius: 10,
   },
+  textColor: {
+    color: "black",
+  },
 }));
 
 const ChatContent = (props) => {
@@ -39,7 +42,7 @@ const ChatContent = (props) => {
 
   const { conversation } = props;
   const { latestMessageText, otherUser } = conversation;
-  const black = props.unRead ? "black" : "";
+  const blackText = props.unRead;
   return (
     <Box className={classes.root}>
       <Box>
@@ -47,8 +50,7 @@ const ChatContent = (props) => {
           {otherUser.username}
         </Typography>
         <Typography
-          className={classes.previewText}
-          style={{ color: `${black}` }}
+          className={`${classes.previewText} ${blackText && classes.textColor}`}
         >
           {latestMessageText}
         </Typography>

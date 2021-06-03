@@ -112,6 +112,6 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
 };
 
 export const setRead = (conversation) => async (dispatch) => {
-  await axios.get(`/api/messages/clearUnRead/${conversation.id}`);
+  await axios.delete(`/api/conversations/${conversation.id}/unread-messsages`);
   dispatch(setReadZero(conversation));
 };
