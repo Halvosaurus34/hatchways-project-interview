@@ -48,7 +48,9 @@ app.use("/api", require("./routes/api"));
 app.use(function (req, res, next) {
   next(createError(404));
 });
-
+app.get("/", (req, res) => {
+  res.send("APP IS RUNNING");
+});
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
